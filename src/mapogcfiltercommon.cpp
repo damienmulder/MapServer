@@ -438,6 +438,14 @@ FLTGetSpatialComparisonCommonExpression(FilterEncodingNode *psNode,
     rectObj sQueryRect;
     FLTGetBBOX(psNode, &sQueryRect);
 
+    if (!CPLIsFinite(sQueryRect.minx) || !CPLIsFinite(sQueryRect.miny) ||
+        !CPLIsFinite(sQueryRect.maxx) || !CPLIsFinite(sQueryRect.maxy)) {
+      msSetError(MS_MISCERR,
+                 "Invalid (NaN or infinite) coordinate values in spatial filter.",
+                 "FLTGetSpatialComparisonCommonExpression()");
+      return std::string();
+    }
+
     char szPolygon[512];
     snprintf(szPolygon, sizeof(szPolygon),
              "POLYGON((%.18f %.18f,%.18f %.18f,%.18f %.18f,%.18f %.18f,%.18f "

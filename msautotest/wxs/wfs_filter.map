@@ -200,6 +200,12 @@
 # RUN_PARMS: wfs_filter_invalid_not.xml [MAPSERV] QUERY_STRING="map=[MAPFILE]&SERVICE=WFS&VERSION=1.0.0&REQUEST=GetFeature&TYPENAME=popplace&FILTER=<Filter><Not/></Filter>" > [RESULT]
 # RUN_PARMS: wfs_filter_invalid_foo.xml [MAPSERV] QUERY_STRING="map=[MAPFILE]&SERVICE=WFS&VERSION=1.0.0&REQUEST=GetFeature&TYPENAME=popplace&FILTER=<Filter><foo/></Filter>" > [RESULT]
 # RUN_PARMS: wfs_filter_invalid_bbox.xml [MAPSERV] QUERY_STRING="map=[MAPFILE]&SERVICE=WFS&VERSION=1.0.0&REQUEST=GetFeature&TYPENAME=popplace&FILTER=<Filter><BBOX/></Filter>" > [RESULT]
+# NaN coordinate validation: gml:Box coordinates element (FLTParseGMLBox Path A)
+# RUN_PARMS: wfs_filter_bbox_nan_coordinates.xml [MAPSERV] QUERY_STRING="map=[MAPFILE]&SERVICE=WFS&VERSION=1.0.0&REQUEST=GetFeature&TYPENAME=popplace&FILTER=<Filter><BBOX><PropertyName>POINT</PropertyName><Box+srsName=%22EPSG:4326%22><coordinates>NaN,NaN+NaN,NaN</coordinates></Box></BBOX></Filter>" > [RESULT]
+# NaN coordinate validation: gml:Box coord elements (FLTParseGMLBox Path B)
+# RUN_PARMS: wfs_filter_bbox_nan_coord_elements.xml [MAPSERV] QUERY_STRING="map=[MAPFILE]&SERVICE=WFS&VERSION=1.1.0&REQUEST=GetFeature&TYPENAME=popplace&FILTER=<Filter><BBOX><PropertyName>POINT</PropertyName><Box><coord><X>NaN</X><Y>NaN</Y></coord><coord><X>NaN</X><Y>NaN</Y></coord></Box></BBOX></Filter>" > [RESULT]
+# NaN coordinate validation: gml:Envelope lowerCorner/upperCorner (FLTParseGMLEnvelope, WFS 2.0)
+# RUN_PARMS: wfs_filter_200_bbox_nan_envelope.xml [MAPSERV] QUERY_STRING="map=[MAPFILE]&SERVICE=WFS&VERSION=2.0.0&REQUEST=GetFeature&TYPENAME=popplace&FILTER=<Filter><BBOX><ValueReference>POINT</ValueReference><Envelope+srsName=%22EPSG:4326%22><lowerCorner>NaN+NaN</lowerCorner><upperCorner>NaN+NaN</upperCorner></Envelope></BBOX></Filter>" > [RESULT_DEVERSION]
 # RUN_PARMS: wfs_filter_invalid_featureid.xml [MAPSERV] QUERY_STRING="map=[MAPFILE]&SERVICE=WFS&VERSION=1.0.0&REQUEST=GetFeature&TYPENAME=popplace&FILTER=<Filter><FeatureId/></Filter>" > [RESULT]
 # RUN_PARMS: wfs_filter_invalid_property_is_equal.xml [MAPSERV] QUERY_STRING="map=[MAPFILE]&SERVICE=WFS&VERSION=1.0.0&REQUEST=GetFeature&TYPENAME=popplace&FILTER=<Filter><PropertyIsEqualTo/></Filter>" > [RESULT]
 # RUN_PARMS: wfs_filter_invalid_property_is_equal_2.xml [MAPSERV] QUERY_STRING="map=[MAPFILE]&SERVICE=WFS&VERSION=1.0.0&REQUEST=GetFeature&TYPENAME=popplace&FILTER=<Filter><PropertyIsEqualTo><PropertyName/></PropertyIsEqualTo></Filter>" > [RESULT]
