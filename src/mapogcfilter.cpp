@@ -37,6 +37,7 @@
 #include "maptime.h"
 #include "mapows.h"
 #include <ctype.h>
+#include <cmath>
 
 #if 0
 static int FLTHasUniqueTopLevelDuringFilter(FilterEncodingNode *psFilterNode);
@@ -2548,8 +2549,8 @@ int FLTParseGMLBox(CPLXMLNode *psBox, rectObj *psBbox, char **ppszSRS) {
           miny = atof(papszMin[1]);
           maxx = atof(papszMax[0]);
           maxy = atof(papszMax[1]);
-          if (CPLIsFinite(minx) && CPLIsFinite(miny) &&
-              CPLIsFinite(maxx) && CPLIsFinite(maxy)) {
+          if (std::isfinite(minx) && std::isfinite(miny) &&
+              std::isfinite(maxx) && std::isfinite(maxy)) {
             bCoordinatesValid = 1;
           } else {
             msSetError(MS_MISCERR,
@@ -2578,8 +2579,8 @@ int FLTParseGMLBox(CPLXMLNode *psBox, rectObj *psBbox, char **ppszSRS) {
           if (pszX && pszY) {
             maxx = atof(pszX);
             maxy = atof(pszY);
-            if (CPLIsFinite(minx) && CPLIsFinite(miny) &&
-                CPLIsFinite(maxx) && CPLIsFinite(maxy)) {
+            if (std::isfinite(minx) && std::isfinite(miny) &&
+                std::isfinite(maxx) && std::isfinite(maxy)) {
               bCoordinatesValid = 1;
             } else {
               msSetError(MS_MISCERR,
@@ -2641,8 +2642,8 @@ int FLTParseGMLEnvelope(CPLXMLNode *psRoot, rectObj *psBbox, char **ppszSRS) {
           if (tokens && n >= 2) {
             double maxx = atof(tokens[0]);
             double maxy = atof(tokens[1]);
-            if (CPLIsFinite(minx) && CPLIsFinite(miny) &&
-                CPLIsFinite(maxx) && CPLIsFinite(maxy)) {
+            if (std::isfinite(minx) && std::isfinite(miny) &&
+                std::isfinite(maxx) && std::isfinite(maxy)) {
               psBbox->minx = minx;
               psBbox->miny = miny;
               psBbox->maxx = maxx;
